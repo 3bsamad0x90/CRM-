@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CustomerResource;
 use App\Models\Customer;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
@@ -11,7 +12,9 @@ class CustomerController extends Controller
 {
     public function index(){
         $customers = Customer::all();
-        return response()->json(['status' => 'Success', 'data' => $customers]);
+        // return response()->json(['status' => 'Success', 'data' => $customers]);
+        // return response()->json(CustomerResource::collection($customers), Response::HTTP_OK);
+        return CustomerResource::collection($customers);
     }
 
     public function show($id){
