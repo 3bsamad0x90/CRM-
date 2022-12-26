@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\NoteResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CustomerResource extends JsonResource
@@ -18,6 +19,12 @@ class CustomerResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             // 'notes' => NoteResource::collection($this->notes)
+            // 'notes' => [
+            //     'id' => $this->notes->id,
+            //     'note' => $this->notes->note,
+            //     'customer_id' => $this->notes->customer_id
+            // ]
+            'note' => new NoteResource($this->notes)
         ];
     }
 }

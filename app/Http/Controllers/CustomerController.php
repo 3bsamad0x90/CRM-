@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 class CustomerController extends Controller
 {
     public function index(){
-        $customers = Customer::all();
+        // $customers = Customer::all();
+        $customers = Customer::with('notes')->get();
         // return response()->json(['status' => 'Success', 'data' => $customers]);
         // return response()->json(CustomerResource::collection($customers), Response::HTTP_OK);
         return CustomerResource::collection($customers);
