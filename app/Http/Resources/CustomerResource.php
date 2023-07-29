@@ -24,7 +24,7 @@ class CustomerResource extends JsonResource
             //     'note' => $this->notes->note,
             //     'customer_id' => $this->notes->customer_id
             // ]
-            'note' => new NoteResource($this->notes)
+            // 'note' => new NoteResource($this->notes)
         ];
     }
 }

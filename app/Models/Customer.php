@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['name'];
+    
     public function notes(){
         return $this->hasMany(Note::class);
     }

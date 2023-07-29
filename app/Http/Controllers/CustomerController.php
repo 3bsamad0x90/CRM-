@@ -18,8 +18,7 @@ class CustomerController extends Controller
         return CustomerResource::collection($customers);
     }
 
-    public function show($id){
-        $customer = Customer::find($id);
+    public function show(Customer $customer){
         if(!$customer){
             return response()->json(['status' => 'Error'], Response::HTTP_NOT_FOUND);
         }else{
@@ -46,8 +45,7 @@ class CustomerController extends Controller
         }
     }
 
-    public function destroy($id){
-        $customer = Customer::find($id);
+    public function destroy(Customer $customer){
         if(!$customer){
             return response()->json(['status' => 'Error'], Response::HTTP_NOT_FOUND);
         }else{
