@@ -41,7 +41,7 @@ abstract class ApiRequest extends FormRequest
                     'message' => 'validation errors',
                     'errors' => $transFormedErrors
                 ],
-                JsonResponse::HTTP_BAD_REQUEST
+                JsonResponse::HTTP_UNPROCESSABLE_ENTITY
             ));
         }
     }
