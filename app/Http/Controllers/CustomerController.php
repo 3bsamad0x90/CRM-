@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\customers\CustomerStoreRequest;
 use App\Http\Resources\CustomerResource;
 use App\Models\Customer;
 use Illuminate\Http\Response;
@@ -26,11 +27,13 @@ class CustomerController extends Controller
         }
     }
 
-    public function store(Request $request){
-        $customer = new Customer;
-        $customer->name = $request->name;
-        $customer->save();
-        return response()->json(['status' => 'Success', 'data' => $customer]);
+    public function store(CustomerStoreRequest $request){
+        $customer = Customer::firstOrCreate([
+            'name' => $request->name
+        ],[
+            $request->validated()
+        ]);
+        return response()->json(['status' => true, 'data' => $customer]);
 
     }
 
