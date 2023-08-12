@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\customers;
+namespace Crm\Customer\Requests;
 
 use Crm\Base\Requests\ApiRequest;
 
