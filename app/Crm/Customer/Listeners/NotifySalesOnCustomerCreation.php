@@ -2,7 +2,7 @@
 
 namespace Crm\Customer\Listeners;
 
-use App\Events\CustomerCreation;
+use Crm\Customer\Events\CustomerCreation;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -21,7 +21,7 @@ class NotifySalesOnCustomerCreation
     /**
      * Handle the event.
      *
-     * @param  \App\Events\CustomerCreation  $event
+     * @param  CustomerCreation  $event
      * @return void
      */
     public function handle(CustomerCreation $event)

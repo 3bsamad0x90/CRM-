@@ -2,7 +2,7 @@
 
 namespace Crm\Customer\Listeners;
 
-use App\Events\CustomerCreation;
+use Crm\Customer\Events\CustomerCreation;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -26,6 +26,10 @@ class SendWelcomeEmail
      */
     public function handle(CustomerCreation $event)
     {
-        //
+        // get the customer from the event
+        $customer = $event->getCustomer();
+        dd($customer);
+        // send the welcome email to the customer
+        // $customer->sendWelcomeEmail()
     }
 }
