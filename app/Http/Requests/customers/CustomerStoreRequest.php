@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\customers;
 
-use App\Http\Requests\ApiRequest;
+use Crm\Base\Requests\ApiRequest;
 
 class CustomerStoreRequest extends ApiRequest
 {
