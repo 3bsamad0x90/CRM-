@@ -2,10 +2,10 @@
 
 namespace Crm\Customer\Services;
 
-use App\Http\Resources\CustomerResource;
 use Crm\Base\Response\traitResponse;
 use Crm\Customer\Events\CustomerCreation;
 use Crm\Customer\Models\Customer;
+use Crm\Customer\Resources\CustomerResource;
 
 class CustomerService
 {
@@ -29,7 +29,7 @@ class CustomerService
     public function store(array $data)
     {
         $customer = Customer::firstOrCreate($data);
-        
+
         event(new CustomerCreation($customer));
 
         return $this->successfully('Created Successfully', [

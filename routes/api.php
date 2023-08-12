@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Customer routes
 Route::Resource('customers', CustomerController::class);
+Route::Resource('projects', ProjectController::class);
+
 
 //Note routes
 Route::prefix('customer/')->group(function () {
