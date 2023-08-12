@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace Crm\Customer\Resources;
 
 use App\Http\Resources\NoteResource;
 use Illuminate\Http\Resources\Json\JsonResource;
