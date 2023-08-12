@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\customers\CustomerStoreRequest;
-use App\Http\Resources\CustomerResource;
 use Crm\Customer\Models\Customer;
+use Crm\Customer\Requests\CustomerStoreRequest;
 use Crm\Customer\Services\CustomerService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class CustomerController extends Controller
 {
