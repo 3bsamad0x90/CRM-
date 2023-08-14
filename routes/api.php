@@ -17,13 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:sanctum')->group(function(){
+    Route::Resource('customers', CustomerController::class);
+    Route::Resource('projects', ProjectController::class);
 
-//Customer routes
-Route::Resource('customers', CustomerController::class);
-Route::Resource('projects', ProjectController::class);
+});
 
 
 //Note routes
