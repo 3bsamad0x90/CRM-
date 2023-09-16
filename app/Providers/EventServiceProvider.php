@@ -7,6 +7,8 @@ use Crm\Customer\Listeners\NotifySalesOnCustomerCreation;
 use Crm\Customer\Listeners\SendWelcomeEmail;
 use Crm\Project\Events\ProjectCreation;
 use Crm\Project\Listeners\NotifyProjectCustomer;
+use Crm\User\Events\UserCreation;
+use Crm\User\Listeners\WelcomeEmail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -31,6 +33,10 @@ class EventServiceProvider extends ServiceProvider
 
         ProjectCreation::class => [
             NotifyProjectCustomer::class,
+        ],
+
+        UserCreation::class => [
+            WelcomeEmail::class,
         ],
     ];
 

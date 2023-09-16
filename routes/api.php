@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
 });
 
+Route::Resource('users', UserController::class);
 
 //Note routes
 Route::prefix('customer/')->group(function () {
