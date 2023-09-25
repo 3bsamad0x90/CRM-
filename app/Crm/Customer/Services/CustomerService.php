@@ -5,15 +5,22 @@ namespace Crm\Customer\Services;
 use Crm\Base\Response\traitResponse;
 use Crm\Customer\Events\CustomerCreation;
 use Crm\Customer\Models\Customer;
+use Crm\Customer\Repositories\CustomerRepository;
 use Crm\Customer\Resources\CustomerResource;
 
 class CustomerService
 {
     use traitResponse;
+    private CustomerRepository $customerRepository;
 
-    public function index($request)
+    public function __construct(CustomerRepository $customerRepository)
     {
-        $customers = Customer::with('notes')->get();
+        $this->customerRepository = $customerRepository;
+    }
+
+    public function index()
+    {
+        $customers = $this->customerRepository->index();
         return $this->successfully('Success', [
             'customers' => CustomerResource::collection($customers)
         ]);
