@@ -16,35 +16,30 @@ class CustomerController extends Controller
         $this->customerService = $customerService;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        // $customers = Customer::all();
-        // $customers = Customer::with('notes')->get();
-        // return response()->json(['status' => 'Success', 'data' => $customers]);
-        // return response()->json(CustomerResource::collection($customers), Response::HTTP_OK);
-        // return CustomerResource::collection($customers);
-        // using service
-        return  $this->customerService->index($request);
+        return  $this->customerService->index();
     }
 
-    public function show(Customer $customer){
+    public function show(Customer $customer)
+    {
         return $this->customerService->show($customer);
     }
 
-    public function store(CustomerStoreRequest $request){
+    public function store(CustomerStoreRequest $request)
+    {
         $customer = $request->validated();
         return $this->customerService->store($customer);
     }
 
-    public function update(CustomerStoreRequest $request, Customer $customer){
+    public function update(CustomerStoreRequest $request, Customer $customer)
+    {
         $data = $request->validated();
         return $this->customerService->update($data, $customer);
     }
 
-    public function destroy(Customer $customer){
-        if($this->customerService->delete($customer)){
-            return response()->json(['status' => 'Success', 'message' => 'Deleted Successfully']);
-        }
-        return response()->json(['status' => 'Failed', 'message' => 'Failed to delete']);
+    public function destroy(Customer $customer)
+    {
+        return $this->customerService->delete($customer);
     }
 }
