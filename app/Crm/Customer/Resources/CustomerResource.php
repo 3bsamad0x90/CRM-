@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace Crm\Customer\Resources;
 
 use App\Http\Resources\NoteResource;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -24,7 +24,7 @@ class CustomerResource extends JsonResource
             //     'note' => $this->notes->note,
             //     'customer_id' => $this->notes->customer_id
             // ]
-            'note' => new NoteResource($this->notes)
+            // 'note' => new NoteResource($this->notes)
         ];
     }
 }

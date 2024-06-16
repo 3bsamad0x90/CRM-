@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace Crm\Customer\Models;
 
-use App\Models\Customer;
+use Crm\Customer\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

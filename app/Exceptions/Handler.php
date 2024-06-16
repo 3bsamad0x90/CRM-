@@ -3,6 +3,9 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
+use Psy\Util\Json;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,5 +49,30 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+            return response()->json([
+                'status' => 'Error',
+                'message' => "The requested model was not found",
+            ], JsonResponse::HTTP_NOT_FOUND);
+        }
+
+        if ($e instanceof \Illuminate\Auth\AuthenticationException) {
+            return response()->json([
+                'status' => 'Error',
+                'message' => "Unauthenticated",
+            ], JsonResponse::HTTP_UNAUTHORIZED);
+        }else{
+            Log::error($e);
+            return response()->json([
+                'status' => 'Error',
+                'message' => $e->getMessage(),
+            ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        return parent::render($request, $e);
     }
 }

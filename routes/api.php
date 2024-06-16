@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,17 +18,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function(){
+    Route::Resource('customers', CustomerController::class);
+    Route::Resource('projects', ProjectController::class);
+
 });
 
-//Customer routes
-Route::get('/customers', [CustomerController::class, 'index']);
-Route::get('/customers/{id}', [CustomerController::class, 'show']);
-Route::post('/customers', [CustomerController::class, 'store']);
-Route::Put('/customers/{id}', [CustomerController::class, 'update']);
-Route::Delete('/customers/{id}', [CustomerController::class, 'destroy']);
-
+Route::Resource('users', UserController::class);
 
 //Note routes
 Route::prefix('customer/')->group(function () {

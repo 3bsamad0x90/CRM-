@@ -2,57 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CustomerResource;
-use App\Models\Customer;
-use Illuminate\Http\Response;
+use Crm\Customer\Models\Customer;
+use Crm\Customer\Requests\CustomerStoreRequest;
+use Crm\Customer\Services\CustomerService;
 use Illuminate\Http\Request;
-
 
 class CustomerController extends Controller
 {
-    public function index(){
-        // $customers = Customer::all();
-        $customers = Customer::with('notes')->get();
-        // return response()->json(['status' => 'Success', 'data' => $customers]);
-        // return response()->json(CustomerResource::collection($customers), Response::HTTP_OK);
-        return CustomerResource::collection($customers);
+    private CustomerService $customerService;
+
+    public function __construct(CustomerService $customerService)
+    {
+        $this->customerService = $customerService;
     }
 
-    public function show($id){
-        $customer = Customer::find($id);
-        if(!$customer){
-            return response()->json(['status' => 'Error'], Response::HTTP_NOT_FOUND);
-        }else{
-            return response()->json(['status' => 'Success', 'data' => $customer]);
-        }
+    public function index()
+    {
+        return  $this->customerService->index();
     }
 
-    public function store(Request $request){
-        $customer = new Customer;
-        $customer->name = $request->name;
-        $customer->save();
-        return response()->json(['status' => 'Success', 'data' => $customer]);
-
+    public function show(Customer $customer)
+    {
+        return $this->customerService->show($customer);
     }
 
-    public function update(Request $request, $id){
-        $customer = Customer::find($id);
-        if(!$customer){
-            return response()->json(['status' => 'Error'], Response::HTTP_NOT_FOUND);
-        }else{
-            $customer->name = $request->name;
-            $customer->save();
-            return response()->json(['status' => 'Success', 'data' => $customer]);
-        }
+    public function store(CustomerStoreRequest $request)
+    {
+        $customer = $request->validated();
+        return $this->customerService->store($customer);
     }
 
-    public function destroy($id){
-        $customer = Customer::find($id);
-        if(!$customer){
-            return response()->json(['status' => 'Error'], Response::HTTP_NOT_FOUND);
-        }else{
-            $customer->delete();
-            return response()->json(['status' => 'Success', 'data' => $customer]);
-        }
+    public function update(CustomerStoreRequest $request, Customer $customer)
+    {
+        $data = $request->validated();
+        return $this->customerService->update($data, $customer);
+    }
+
+    public function destroy(Customer $customer)
+    {
+        return $this->customerService->delete($customer);
     }
 }
